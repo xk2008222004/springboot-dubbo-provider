@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
+@SpringBootApplication()
 @EnableDubboConfiguration //开启dubbo配置文件
 @RestController
 @MapperScan(value="com.example.dubbo.springbootdubbo.mapper")

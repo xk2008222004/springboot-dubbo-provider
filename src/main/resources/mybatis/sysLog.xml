@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dubbo.springbootdubbo.mapper.SysLogMapper">
+
+    <sql id="sysConfigQuerySql">
+        id,model,method,param,result,create_time,full_log
+    </sql>
+
+    <select id="queryLog" resultType="com.example.springbootdubbo.po.SysLog" parameterType="com.example.springbootdubbo.po.SysLog">
+        select
+        <include refid="sysConfigQuerySql"/>
+        from sys_log
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+
+            <if test="model!=null">
+                and model=#{model}
+            </if>
+
+            <if test="method!=null">
+                and method=#{method}
+            </if>
+
+            <if test="result!=null">
+                and result=#{result}
+            </if>
+
+            <if test="startTime!=null">
+                <![CDATA[ and create_time>=#{startTime} ]]>
+            </if>
+            <if test="endTime!=null">
+                <![CDATA[ and create_time<=#{endTime} ]]>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertSysLog" parameterType="com.example.springbootdubbo.po.SysLog" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_log(model,method,param,result,create_time,full_log) values(#{model},#{method},#{param},#{result},#{createTime},#{fullLog})
+    </insert>
+
+
+</mapper>
